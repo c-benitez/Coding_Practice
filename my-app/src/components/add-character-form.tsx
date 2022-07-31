@@ -1,59 +1,60 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 export type character = {
-  name: string;
-  HP: number;
-  AC: number;
-  initiative: number;
-};
+  name: string
+  HP: number
+  AC: number
+  initiative: number
+}
 
 export const AddCharacterForm: React.FC<any> = ({ addCharacter }) => {
   const [character, setCharacter] = useState<character>({
-    name: "",
+    name: '',
     HP: 0,
     AC: 0,
     initiative: 0,
-  });
+  })
 
   const onNameChange = (event) => {
-    setCharacter({ ...character, name: event.target.value });
-    console.log(character.name);
-  };
+    setCharacter({ ...character, name: event.target.value })
+  }
 
   const onHPChange = (event) => {
-    setCharacter({ ...character, HP: event.target.value });
-    console.log(character.HP);
-  };
+    setCharacter({ ...character, HP: event.target.value })
+  }
 
   const onACChange = (event) => {
-    setCharacter({ ...character, AC: event.target.value });
-    console.log(character.AC);
-  };
+    setCharacter({ ...character, AC: event.target.value })
+  }
 
   const onInitiativeChange = (event) => {
-    console.log(character.initiative);
-    setCharacter({ ...character, initiative: event.target.value });
-  };
-
-  useEffect(() => console.log("Use Effect"));
+    setCharacter({ ...character, initiative: event.target.value })
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("%%%%%%", event);
-  };
+    event.preventDefault()
+    addCharacter(character)
+    setCharacter({
+      name: '',
+      HP: 0,
+      AC: 0,
+      initiative: 0,
+    })
+  }
+
   return (
     <form onSubmit={handleSubmit}>
       <label>
         Name:
-        <input type="text" value={character.name} onChange={onNameChange} />
+        <input type="text" value={character.name} onChange={onNameChange} data-testid="Name" />
       </label>
       <label>
         Current HP:
-        <input type="text" value={character.HP} onChange={onHPChange} />
+        <input type="text" value={character.HP} onChange={onHPChange} data-testid="HP"/>
       </label>
       <label>
         AC:
-        <input type="text" value={character.AC} onChange={onACChange} />
+        <input type="text" value={character.AC} onChange={onACChange} data-testid="AC"/>
       </label>
       <label>
         Initiative:
@@ -61,9 +62,10 @@ export const AddCharacterForm: React.FC<any> = ({ addCharacter }) => {
           type="text"
           value={character.initiative}
           onChange={onInitiativeChange}
+          data-testid="Initiative"
         />
       </label>
       <input type="submit" value="Submit" />
     </form>
-  );
-};
+  )
+}

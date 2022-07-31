@@ -1,13 +1,17 @@
-import "./App.css";
-import { AddCharacterForm, character } from "./components/add-character-form";
-import { useState } from "react";
+import './App.css'
+import { AddCharacterForm, character } from './components/add-character-form'
+import { useEffect, useState } from 'react'
+// eslint-disable-next-line import/no-duplicates
+import React from 'react'
 
 function App() {
-  const [characterList, setCharacterList] = useState<Array<character>>([]);
+  const [characterList, setCharacterList] = useState<Array<character>>([
+    { name: 'Example character', HP: 0, AC: 0, initiative: 0 },
+  ])
 
   const addCharacter = (character: character) => {
-    characterList.push(character);
-  };
+    setCharacterList([...characterList, character])
+  }
 
   return (
     <div className="App">
@@ -24,10 +28,10 @@ function App() {
             <p>{character.AC}</p>
             <p>{character.initiative}</p>
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
